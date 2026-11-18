@@ -398,6 +398,7 @@ def write_json(path, payload):
     directory = os.path.dirname(os.path.abspath(path)) or "."
     os.makedirs(directory, exist_ok=True)
     fd, tmp = tempfile.mkstemp(dir=directory, prefix=".tmp-", suffix=".out")
+    os.fchmod(fd, 0o644)
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as fh:
             fh.write(text)
